@@ -1,0 +1,28 @@
+body{
+  background: #000;
+  color: #fff;
+}
+
+.App {
+  text-align: center;
+  padding: 5%;
+}
+
+.App-title{
+  font-size: 26px;
+}
+
+.Search-form{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.Search-input{
+  width: 80%;
+}
+
+.Search-submit{
+  width: 19%;
+}
