@@ -1,37 +1,34 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 //import {FormGroup, FormControl, InputGroup, Glyphicon} from 'react-bootstrap';
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state={
-      query: ''
+      query: '',
+      media: []
     }
   }
 
   search(e){
     e.preventDefault()
-    console.log('this.state', this.state);
     let mediaBase = [];
-    let pages;
+    //let pages;
     const baseUrl = 'http://www.omdbapi.com/?';
     const fetchUrl = baseUrl + 'apikey=38697045&s=' + this.state.query;
-    console.log(fetchUrl);
+
     fetch(fetchUrl, {
       method: 'GET'
     }).then(response => response.json()).then(json => {
-      if(!json.totalResults){
-        return false
+      if(json.Response === 'True'){
+        //pages = Math.ceil(json.totalResults / 10);
+        mediaBase.push(json.Search);
+        this.setState({media: json.Search})
+        console.log(mediaBase[0]);
       }
-      const responceArr = json;
-      //const clearArr = responceArr.Search;
-      pages = Math.ceil(json.totalResults / 10);
-      mediaBase.push(json.Search);
-      //console.log(json.Response);
-      console.log(pages);
+      return
     })
-
   }
 
   render(){
