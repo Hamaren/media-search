@@ -13,16 +13,25 @@ class App extends Component{
   search(e){
     e.preventDefault()
     console.log('this.state', this.state);
-    let movie;
+    let mediaBase = [];
+    let pages;
     const baseUrl = 'http://www.omdbapi.com/?';
-    const fetchUrl = baseUrl + 'apikey=38697045&s=' + this.state.query + '&page=2';
+    const fetchUrl = baseUrl + 'apikey=38697045&s=' + this.state.query;
     console.log(fetchUrl);
     fetch(fetchUrl, {
       method: 'GET'
-    }).then(response => movie = response.json()).then(json => {
-      movie = json;
-      console.log(movie);
+    }).then(response => response.json()).then(json => {
+      if(!json.totalResults){
+        return false
+      }
+      const responceArr = json;
+      //const clearArr = responceArr.Search;
+      pages = Math.ceil(json.totalResults / 10);
+      mediaBase.push(json.Search);
+      //console.log(json.Response);
+      console.log(pages);
     })
+
   }
 
   render(){
