@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
+import Media from './Media.jsx';
 import './App.scss';
-//import {FormGroup, FormControl, InputGroup, Glyphicon} from 'react-bootstrap';
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state={
       query: '',
-      media: []
+      media: [
+        {
+          Poster: 'test'
+        }
+      ]
     }
   }
 
@@ -36,7 +40,7 @@ class App extends Component{
       <div className="App">
         <div className="App-title">Movies Search</div>
         <form className="Search-form">
-          <input className="Search-input" placeholder="search an artist..."
+          <input className="Search-input" placeholder="Search..."
             value={this.state.query}
             onChange={event => {this.setState({query: event.target.value})}}
             onKeyPress={event => {
@@ -45,15 +49,9 @@ class App extends Component{
               }
             }}
            />
-          <button className="Search-submit" onClick={(event)=> this.search(event)} >button</button>
+          <button className="Search-submit" onClick={(event)=> this.search(event)} ></button>
         </form>
-        <div className="Profile">
-          <div>Movie Name</div>
-          <div>Movie Poster</div>
-        </div>
-        <div className="Gallery">
-           Gallery
-        </div>
+        <Media media={this.state.media} />
       </div>
     )
   }

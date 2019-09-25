@@ -3,8 +3,58 @@ body{
   color: #fff;
 }
 
+.Media{
+  margin-top: 100px;
+
+  &__wrapper{
+
+  }
+}
+
+.Media-block{
+  display: flex;
+  align-items: flex-start;
+
+  &__poster{
+    width: 300px;
+  }
+
+  &__poster-img{
+    display: block;
+    width: 100%;
+  }
+
+  &__info{
+    width: 800px;
+    padding: 0 30px;
+  }
+
+  &__title{
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__table{
+    width: 100%;
+  }
+
+  &__info-row{
+    border-bottom: 1px solid grey;
+  }
+
+  &__info-col{
+    font-size: 16px;
+    padding: 4px;
+    text-align: left;
+  }
+
+  .col-th{
+    font-weight: 500;
+    width: 160px;
+  }
+}
+
 .App {
-  text-align: center;
   padding: 5%;
 }
 
@@ -13,16 +63,45 @@ body{
 }
 
 .Search-form{
-  display: flex;
-  justify-content: space-between;
+  position: relative;
   margin: 0 auto;
   max-width: 600px;
 }
 
 .Search-input{
-  width: 80%;
+  border: 2px solid #756a6a;
+  border-radius: 6px;
+  padding: 6px 16px;
+  background: #2C2C33;
+  width: 100%;
+  color: #fff;
+  transition: all 0.3s;
+
+  &:focus{
+    border-color: #CC1D1D;
+  }
 }
 
 .Search-submit{
-  width: 19%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background: url("/images/icons/search-icon.svg") center center no-repeat;
+  border: none;
+  width: 50px;
+  height: 100%;
 }
+
+.box{
+  box-sizing: border-box;
+}
+
+a:active, a:focus { outline: none; }
+
+input, textarea, button:focus {outline:none;}
+input:active, button:active textarea:active {outline:none;}
+:focus {outline:none;}
+textarea {resize:none;}
+textarea {resize:vertical;}
+textarea {resize:horizontal;}
