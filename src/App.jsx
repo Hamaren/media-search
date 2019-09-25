@@ -7,11 +7,7 @@ class App extends Component{
     super(props);
     this.state={
       query: '',
-      media: [
-        {
-          Poster: 'test'
-        }
-      ]
+      media: []
     }
   }
 
@@ -29,7 +25,6 @@ class App extends Component{
         //pages = Math.ceil(json.totalResults / 10);
         mediaBase.push(json.Search);
         this.setState({media: json.Search})
-        console.log(mediaBase[0]);
       }
       return
     })
@@ -38,7 +33,7 @@ class App extends Component{
   render(){
     return(
       <div className="App">
-        <div className="App-title">Movies Search</div>
+        <div className="App-title">Media Search</div>
         <form className="Search-form">
           <input className="Search-input" placeholder="Search..."
             value={this.state.query}

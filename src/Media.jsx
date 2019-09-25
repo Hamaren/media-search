@@ -11,14 +11,11 @@ class Media extends Component{
   render(){
     return(
       <div className="Media">
-       { (this.props.media.length > 0) ?
+       { (this.props.media.length !== 0) ?
          this.props.media.map((media, i) =>{
-           return (<MediaBlock key={i} mediaUnit={media} />)
-         }) :
-         ''
-
+           return (<MediaBlock key={i} data={media} />)
+         }) : ''
        }
-        <MediaBlock />
       </div>
     )
   }
