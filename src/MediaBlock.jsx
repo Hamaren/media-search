@@ -4,40 +4,115 @@ import './App.scss';
 class MediaBlock extends Component{
   constructor(props){
     super(props)
+    this.state = {
+      Rated: '',
+      Runtime: '',
+      Genre: '',
+      Director: '',
+      Writer: '',
+      Actors: '',
+      Country: '',
+      Rating: '',
+      Released: '',
+      Production: '',
+      Website: '',
+      Awards: '',
+      Plot: ''
+    }
   }
-
-  /*requestM(link){
-    let fullInfo;
-    fetch(link, {
-      method: 'GET'
-    }).then(response => response.json()).then(json => {
-      fullInfo = json
-      let fff = setTimeout(function(){
-        return fullInfo.Title
-      },1000)
-    })
-
-  }*/
 
   componentDidMount(){
 
   }
 
-  showDetails(event){
+  componentWillUnmount(){
+    this.setState({
+      Rated: '',
+      Runtime: '',
+      Genre: '',
+      Director: '',
+      Writer: '',
+      Actors: '',
+      Country: '',
+      Rating: '',
+      Released: '',
+      Production: '',
+      Website: '',
+      Awards: '',
+      Plot: ''
+    })
+  }
+
+  showDetails = event =>{
     event.preventDefault();
     const targetId = event.target.getAttribute('mid');
     const detailsTarget = event.target.previousSibling.firstChild;
+    let self = this;
 
-    fetch('http://www.omdbapi.com/?apikey=38697045&i=' + targetId, {
+    /*this.setState({
+      Rated: '1111'
+    })*/
+
+    let test = (detailsObj) => this.setState({
+      Rated: detailsObj
+    })
+
+    fetch('http://www.omdbapi.com/?apikey=38697045&i=' + targetId + '&plot=full', {
       method: 'GET'
     }).then(response => response.json()).then(json => {
-      let detailsArr = []
 
-      for(let key in json){
-        //if() continue
-        console.log(json[key]);
+
+      this.setState({
+        Rated: json.Rated,
+        Runtime: json.Runtime,
+        Genre: json.Genre,
+        Director: json.Director,
+        Writer: json.Writer,
+        Actors: json.Actors,
+        Country: json.Country,
+        Rating: json.imdbRating,
+        Released: json.Released,
+        Production: json.Production,
+        Website: json.Website,
+        Awards: json.Awards,
+        Plot: json.Plot
+      })
+
+      /*let detailsObj = {
+        Rated: json.Rated,
+        Runtime: json.Runtime,
+        Genre: json.Genre,
+        Director: json.Director,
+        Writer: json.Writer,
+        Actors: json.Actors,
+        Country: json.Country,
+        Rating: json.imdbRating,
+        Released: json.Released,
+        Production: json.Production,
+        Website: json.Website,
+        Awards: json.Awards,
+        Plot: json.Plot
+      }*/
+
+      //test(detailsObj);
+
+      //console.log(this.st);
+
+      for(let key in this.state){
+        let tr = document.createElement('tr');
+        let th = document.createElement('td');
+        let td = document.createElement('td');
+
+        tr.className = 'Media-block__info-row';
+        th.className = 'Media-block__info-col col-th';
+        td.className = 'Media-block__info-col';
+        th.innerHTML = key;
+        td.innerHTML = this.state[key];
+
+        tr.appendChild(th);
+        tr.appendChild(td);
+        detailsTarget.appendChild(tr);
       }
-
     })
   }
 
