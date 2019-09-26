@@ -53,6 +53,21 @@ body{
     font-weight: 500;
     width: 160px;
   }
+
+  &__details{
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 8px 0;
+    text-align: center;
+    color: #d1d15b;
+    transition: color 0.3s;
+
+    &:hover{
+      color: #8b8b5b;
+      cursor: pointer;
+    }
+  }
 }
 
 .App {

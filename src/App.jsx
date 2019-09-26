@@ -35,7 +35,7 @@ class App extends Component{
       <div className="App">
         <div className="App-title">Media Search</div>
         <form className="Search-form">
-          <input className="Search-input" placeholder="Search..."
+          <input className="Search-input box" placeholder="Search..."
             value={this.state.query}
             onChange={event => {this.setState({query: event.target.value})}}
             onKeyPress={event => {
