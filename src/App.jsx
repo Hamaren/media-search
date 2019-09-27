@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Media from './Media.jsx';
+import Pagination from './Pagination.jsx';
 import './App.scss';
 
 class App extends Component{
@@ -7,14 +8,15 @@ class App extends Component{
     super(props);
     this.state={
       query: '',
-      media: []
+      media: [],
+      pages: 1
     }
   }
 
   search(e){
     e.preventDefault()
-    let mediaBase = [];
-    //let pages;
+    //let mediaBase = [];
+    let pages;
     const baseUrl = 'http://www.omdbapi.com/?';
     const fetchUrl = baseUrl + 'apikey=38697045&s=' + this.state.query;
 
@@ -22,9 +24,9 @@ class App extends Component{
       method: 'GET'
     }).then(response => response.json()).then(json => {
       if(json.Response === 'True'){
-        //pages = Math.ceil(json.totalResults / 10);
-        mediaBase.push(json.Search);
-        this.setState({media: json.Search})
+        pages = Math.ceil(json.totalResults / 10);
+        //mediaBase.push(json.Search);
+        this.setState({media: json.Search, pages: pages})
       }
       return
     })
@@ -46,6 +48,7 @@ class App extends Component{
            />
           <button className="Search-submit" onClick={(event)=> this.search(event)} ></button>
         </form>
+        <Pagination pages={this.state.pages} />
         <Media media={this.state.media} />
       </div>
     )

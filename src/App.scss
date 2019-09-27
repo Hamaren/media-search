@@ -47,6 +47,24 @@ body{
   color: #fff;
 }
 
+.Pagination{
+  max-width: 600px;
+  margin: 50px 0 20px 0;
+}
+
+.Page{
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  //border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  padding: 2px 6px;
+
+  &:last-child{
+    border-right: none;
+  }
+}
+
 .Media{
   margin-top: 100px;
 
@@ -62,6 +80,7 @@ body{
 
   &__poster{
     width: 300px;
+    opacity: 0;
   }
 
   &__poster-img{

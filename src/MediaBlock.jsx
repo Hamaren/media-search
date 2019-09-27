@@ -21,37 +21,11 @@ class MediaBlock extends Component{
     }
   }
 
-  componentDidMount(){
-
-  }
-
-  componentWillUnmount(){
-    this.setState({
-      Rated: '',
-      Runtime: '',
-      Genre: '',
-      Director: '',
-      Writer: '',
-      Actors: '',
-      Country: '',
-      Rating: '',
-      Released: '',
-      Production: '',
-      Website: '',
-      Awards: '',
-      Plot: ''
-    })
-  }
-
   showDetails = event =>{
     event.preventDefault();
     const targetId = event.target.getAttribute('mid');
     const detailsTarget = event.target.previousSibling.firstChild;
     let self = this;
-
-    /*this.setState({
-      Rated: '1111'
-    })*/
 
     let test = (detailsObj) => this.setState({
       Rated: detailsObj
@@ -93,10 +67,6 @@ class MediaBlock extends Component{
         Awards: json.Awards,
         Plot: json.Plot
       }*/
-
-      //test(detailsObj);
-
-      //console.log(this.st);
 
       for(let key in this.state){
         let tr = document.createElement('tr');

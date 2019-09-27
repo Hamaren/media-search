@@ -5,7 +5,6 @@ import './App.scss';
 class Media extends Component{
   constructor(props){
     super(props);
-
   }
 
   render(){
