@@ -9,14 +9,16 @@ class App extends Component{
     this.state={
       query: '',
       media: [],
-      pages: 1
+      pages: [],
+      currentPage: null
     }
   }
 
   search(e){
     e.preventDefault()
     //let mediaBase = [];
-    let pages;
+    let pagesNum;
+    let pagesArr = []
     const baseUrl = 'http://www.omdbapi.com/?';
     const fetchUrl = baseUrl + 'apikey=38697045&s=' + this.state.query;
 
@@ -24,9 +26,16 @@ class App extends Component{
       method: 'GET'
     }).then(response => response.json()).then(json => {
       if(json.Response === 'True'){
-        pages = Math.ceil(json.totalResults / 10);
+        pagesNum = Math.ceil(json.totalResults / 10);
         //mediaBase.push(json.Search);
-        this.setState({media: json.Search, pages: pages})
+        for(let i=0; i<pagesNum; i++){
+          pagesArr.push(i+1);
+        }
+        this.setState({
+          media: json.Search,
+          pages: pagesArr,
+          currentPage: 1
+        })
       }
       return
     })
@@ -48,7 +57,7 @@ class App extends Component{
            />
           <button className="Search-submit" onClick={(event)=> this.search(event)} ></button>
         </form>
-        <Pagination pages={this.state.pages} />
+        <Pagination pages={this.state.pages} currentPage={this.state.currentPage}/>
         <Media media={this.state.media} />
       </div>
     )

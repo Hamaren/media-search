@@ -8,20 +8,16 @@ class Pagination extends Component{
 
   render(){
     return(
-      <div className="Paginationi">
-
-        {(this.props.pages === 1) ?
-          for(let i = 0; i < 3; i++){
-            console.log(this.props.pages)
-          } : ''
-        }
-        <a className="Page" href="1">1</a>
-        {/*(this.postMessages.length == 0) ?
-          <div className="no-posts">No posts</div> :
-          this.postMessages.map((post, i) => {
-             return (<Post key={i} ttest={post.message} />)
-          })*/}
-      </div>
+      (this.props.pages.length > 1) ?
+      <div className="Pagination">
+      {
+        this.props.pages.map((page, i) => {
+          return (<div className={
+          (page === this.props.currentPage) ? 'Page Current-page' : 'Page'
+          } page={page} key={i}>{page}</div>)
+        })
+      }
+      </div> : false
     )
   }
 }

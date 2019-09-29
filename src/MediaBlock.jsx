@@ -25,11 +25,6 @@ class MediaBlock extends Component{
     event.preventDefault();
     const targetId = event.target.getAttribute('mid');
     const detailsTarget = event.target.previousSibling.firstChild;
-    let self = this;
-
-    let test = (detailsObj) => this.setState({
-      Rated: detailsObj
-    })
 
     fetch('http://www.omdbapi.com/?apikey=38697045&i=' + targetId + '&plot=full', {
       method: 'GET'
@@ -106,7 +101,7 @@ class MediaBlock extends Component{
                 </tr>
               </tbody>
             </table>
-            <a className="Media-block__details" mid={this.props.data.imdbID} onClick={(event)=>this.showDetails(event)}>Show details</a>
+            <div className="Media-block__details" mid={this.props.data.imdbID} onClick={(event)=>this.showDetails(event)}>Show details</div>
           </div>
         </div>
     )
