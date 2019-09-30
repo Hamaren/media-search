@@ -20,7 +20,8 @@ class App extends Component{
     let pagesNum;
     let pagesArr = []
     const baseUrl = 'http://www.omdbapi.com/?';
-    const fetchUrl = baseUrl + 'apikey=38697045&s=' + query;
+    const year = document.querySelector('.By-year').value;
+    const fetchUrl = baseUrl + 'apikey=38697045&s=' + query + '&y=' + year;
 
     fetch(fetchUrl, {
       method: 'GET'
@@ -41,13 +42,12 @@ class App extends Component{
     })
   }
 
-  searchByPage = (e)=> {
+  searchByPage = (e) => {
     let page = e.target.getAttribute('page');
     fetch(this.state.searchLink + '&page=' + page, {
       method: 'GET'
     }).then(response => response.json()).then(json => {
       if(json.Response === 'True'){
-        console.log(json)
         this.setState({
           currentPage: +page,
           media: json.Search,
@@ -55,6 +55,14 @@ class App extends Component{
       }
       return
     })
+  }
+
+  inputCheck = (event) => {
+    event.target.value = event.target.value.replace(/[^0-9]/g, '');
+  };
+
+  focus = (event) => {
+    console.log(event.target.value)
   }
 
   render(){
@@ -75,12 +83,13 @@ class App extends Component{
           </div>
           <div className="Form-row">
             <div className="Form-group">
-              <label className="Form-label">Search by year</label>
-              <input className="Input" placeholder="Search..." />
+              <label className="Form-label">Release year</label>
+              <input className="Input By-year" placeholder="Year" maxlength="4" onKeyDown={(event)=> this.inputCheck(event)} onBlur={(event)=> this.focus(event)} />
             </div>
             <div className="Form-group">
-              <label className="Form-label">Search by type</label>
-              <select className="Form-select">
+              <label className="Form-label">Media type</label>
+              <select className="select By-type">
+                <option>All types</option>
                 <option>Movie</option>
                 <option>Series</option>
                 <option>Episode</option>
