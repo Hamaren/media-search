@@ -87,7 +87,7 @@ body{
 
   &__poster{
     width: 300px;
-    //opacity: 0;
+    opacity: 0;
   }
 
   &__poster-img{
@@ -152,9 +152,32 @@ body{
 }
 
 .Search-form{
-  position: relative;
   margin: 0 auto;
   max-width: 600px;
+}
+
+.Form-row{
+	display: flex;
+}
+
+.Form-group{
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.Input{
+	border: 2px solid #756a6a;
+  border-radius: 6px;
+  padding: 6px 16px;
+  background: #2C2C33;
+
+  color: #fff;
+  transition: all 0.3s;
+
+	&:focus{
+    border-color: #CC1D1D;
+  }
 }
 
 .Search-input{
