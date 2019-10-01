@@ -21,12 +21,7 @@ class MediaBlock extends Component{
     }
   }
 
-  componentDidMount(){
-    let test = document.querySelector('.Media-block__details');
-    console.log(test)
-  }
-
-  showDetails = event =>{
+  /*showDetails = event =>{
     event.preventDefault();
     const targetId = event.target.getAttribute('mid');
     const detailsTarget = event.target.previousSibling.firstChild;
@@ -66,13 +61,13 @@ class MediaBlock extends Component{
         detailsTarget.appendChild(tr);
       }
     })
-  }
+  }*/
 
   render(){
     return(
         <div className="Media-block">
           <div className="Media-block__poster">
-            <img className="Media-block__poster-img" src={this.props.data.Poster} alt="" />
+            <img className="Media-block__poster-img" src={(this.props.data.Poster !== 'N/A') ? this.props.data.Poster : '/images/no-poster.jpg'} alt="" />
           </div>
           <div className="Media-block__info box">
             <h3 className="Media-block__title">{this.props.data.Title}</h3>
@@ -88,7 +83,6 @@ class MediaBlock extends Component{
                 </tr>
               </tbody>
             </table>
-            <div className="Media-block__details" mid={this.props.data.imdbID} onClick={(event)=>this.showDetails(event)}>Show details</div>
           </div>
         </div>
     )

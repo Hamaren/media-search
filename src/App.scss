@@ -48,7 +48,6 @@ body{
 }
 
 .Pagination{
-  max-width: 600px;
   margin: 50px 0 20px 0;
 }
 
@@ -92,7 +91,7 @@ body{
 
   &__poster{
     width: 300px;
-    opacity: 0;
+    //opacity: 0;
   }
 
   &__poster-img{
@@ -203,6 +202,15 @@ body{
   &:focus{
     border-color: #CC1D1D;
   }
+}
+
+.Help-block{
+  display: none;
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  color: red;
+  font-size: 12px;
 }
 
 .Search-submit{

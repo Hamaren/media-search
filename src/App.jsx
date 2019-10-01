@@ -71,7 +71,7 @@ class App extends Component{
     })
   }
 
-  inputCheck = (event) => {
+  inputCheck(event){
     const key = event.key
       if(!(
           key >= '0' && event.key <= '9' ||
@@ -84,8 +84,14 @@ class App extends Component{
         }
   };
 
-  focus = (event) => {
-
+  inputBlur(event){
+    let helpMessage = document.querySelector('.Help-block');
+    if (event.target.value.length < 4){
+      event.target.value = '';
+      helpMessage.style.display = 'block';
+    } else{
+      helpMessage.style.display = 'none';
+    }
   }
 
   render(){
@@ -107,11 +113,12 @@ class App extends Component{
           <div className="Form-row">
             <div className="Form-group">
               <label className="Form-label">Release year</label>
-              <input className="Input By-year" placeholder="Year" maxLength="4" onKeyDown={(event)=> this.inputCheck(event)} onBlur={(event)=> this.focus(event)} />
+              <input className="Input By-year" placeholder="Year" maxLength="4" onKeyDown={(event)=> this.inputCheck(event)} onBlur={(event)=> this.inputBlur(event)} />
+              <div className="Help-block">Year must be "XXXX" format</div>
             </div>
             <div className="Form-group">
               <label className="Form-label">Media type</label>
-              <select className="select By-type" onBlur={(event)=> this.focus(event)}>
+              <select className="select By-type">
                 <option></option>
                 <option>Movie</option>
                 <option>Series</option>
