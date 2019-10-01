@@ -72,10 +72,6 @@ class App extends Component{
   }
 
   inputCheck = (event) => {
-    event.target.value = event.target.value.replace(/[^0-9]/g, '');
-  };
-
-  focus = (event) => {
     const key = event.key
       if(!(
           key >= '0' && event.key <= '9' ||
@@ -86,6 +82,10 @@ class App extends Component{
         )){
           event.preventDefault();
         }
+  };
+
+  focus = (event) => {
+
   }
 
   render(){
