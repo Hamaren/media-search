@@ -21,6 +21,11 @@ class MediaBlock extends Component{
     }
   }
 
+  componentDidMount(){
+    let test = document.querySelector('.Media-block__details');
+    console.log(test)
+  }
+
   showDetails = event =>{
     event.preventDefault();
     const targetId = event.target.getAttribute('mid');
@@ -29,8 +34,6 @@ class MediaBlock extends Component{
     fetch('http://www.omdbapi.com/?apikey=38697045&i=' + targetId + '&plot=full', {
       method: 'GET'
     }).then(response => response.json()).then(json => {
-
-
       this.setState({
         Rated: json.Rated,
         Runtime: json.Runtime,
@@ -46,22 +49,6 @@ class MediaBlock extends Component{
         Awards: json.Awards,
         Plot: json.Plot
       })
-
-      /*let detailsObj = {
-        Rated: json.Rated,
-        Runtime: json.Runtime,
-        Genre: json.Genre,
-        Director: json.Director,
-        Writer: json.Writer,
-        Actors: json.Actors,
-        Country: json.Country,
-        Rating: json.imdbRating,
-        Released: json.Released,
-        Production: json.Production,
-        Website: json.Website,
-        Awards: json.Awards,
-        Plot: json.Plot
-      }*/
 
       for(let key in this.state){
         let tr = document.createElement('tr');

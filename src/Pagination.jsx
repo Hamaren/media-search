@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import './App.scss';
 
 class Pagination extends Component{
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return(
       (this.props.pages.length > 1) ?

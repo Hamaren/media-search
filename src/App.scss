@@ -59,11 +59,17 @@ body{
   text-decoration: none;
   border-right: 1px solid #fff;
   padding: 2px 6px;
+	margin-bottom: 6px;
   cursor: pointer;
+	transition: color 0.3s;
 
   &:last-child{
     border-right: none;
   }
+
+	&:hover{
+		color: #c6a8a8;
+	}
 }
 
 .Current-page{
@@ -73,11 +79,10 @@ body{
 }
 
 .Media{
-  margin-top: 100px;
-
-  &__wrapper{
-
-  }
+	margin: 40px 0;
+  padding: 30px 0px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
 }
 
 .Media-block{
@@ -214,6 +219,14 @@ body{
 .By-year{
   width: 30px;
   margin-right: 30px;
+}
+
+.Search-status{
+	color: #29c229;
+	font-size: 18px;
+	font-weight: 500;
+	text-align: center;
+	margin: 40px 0;
 }
 
 .box{

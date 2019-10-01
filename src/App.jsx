@@ -7,6 +7,7 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state={
+      response: true,
       sesrchLink: '',
       media: [],
       pages: [],
@@ -15,13 +16,15 @@ class App extends Component{
   }
 
   search(e){
-    e.preventDefault()
-    let query = document.querySelector('.Search-input').value;
-    let pagesNum;
-    let pagesArr = []
-    const baseUrl = 'http://www.omdbapi.com/?';
-    const year = document.querySelector('.By-year').value;
-    const fetchUrl = baseUrl + 'apikey=38697045&s=' + query + '&y=' + year;
+    e.preventDefault();
+
+    let query = document.querySelector('.Search-input').value,
+        pagesNum,
+        pagesArr = [];
+    const baseUrl = 'http://www.omdbapi.com/?',
+          year = document.querySelector('.By-year').value,
+          type = document.querySelector('.By-type').value,
+          fetchUrl = baseUrl + 'apikey=38697045&s=' + query + '&y=' + year + '&type=' + type;
 
     fetch(fetchUrl, {
       method: 'GET'
@@ -32,11 +35,22 @@ class App extends Component{
           pagesArr.push(i+1);
         }
         this.setState({
+          response: true,
           searchLink: fetchUrl,
           media: json.Search,
           pages: pagesArr,
           currentPage: 1
         })
+      } else{
+        this.setState(
+          {
+            response: false,
+            searchLink: '',
+            media: [],
+            pages: [],
+            currentPage: null
+          }
+        )
       }
       return
     })
@@ -62,7 +76,16 @@ class App extends Component{
   };
 
   focus = (event) => {
-    console.log(event.target.value)
+    const key = event.key
+      if(!(
+          key >= '0' && event.key <= '9' ||
+          key === 'ArrowLeft' ||
+          key === 'ArrowRight' ||
+          key === 'Backspace' ||
+          key === 'Delete'
+        )){
+          event.preventDefault();
+        }
   }
 
   render(){
@@ -84,12 +107,12 @@ class App extends Component{
           <div className="Form-row">
             <div className="Form-group">
               <label className="Form-label">Release year</label>
-              <input className="Input By-year" placeholder="Year" maxlength="4" onKeyDown={(event)=> this.inputCheck(event)} onBlur={(event)=> this.focus(event)} />
+              <input className="Input By-year" placeholder="Year" maxLength="4" onKeyDown={(event)=> this.inputCheck(event)} onBlur={(event)=> this.focus(event)} />
             </div>
             <div className="Form-group">
               <label className="Form-label">Media type</label>
-              <select className="select By-type">
-                <option>All types</option>
+              <select className="select By-type" onBlur={(event)=> this.focus(event)}>
+                <option></option>
                 <option>Movie</option>
                 <option>Series</option>
                 <option>Episode</option>
@@ -98,8 +121,10 @@ class App extends Component{
             </div>
           </div>
         </form>
+        {(!this.state.response) ? <div className="Search-status">Media not found</div> : false}
         <Pagination pages={this.state.pages} currentPage={this.state.currentPage} searchByPage={this.searchByPage}/>
-        <Media media={this.state.media} />
+        {(this.state.media.length > 0) ? <Media media={this.state.media} /> : false}
+        <Pagination pages={this.state.pages} currentPage={this.state.currentPage} searchByPage={this.searchByPage}/>
       </div>
     )
   }

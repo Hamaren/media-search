@@ -3,10 +3,6 @@ import MediaBlock from './MediaBlock.jsx';
 import './App.scss';
 
 class Media extends Component{
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return(
       <div className="Media">
