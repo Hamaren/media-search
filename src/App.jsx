@@ -3,12 +3,13 @@ import Media from './Media.jsx';
 import Pagination from './Pagination.jsx';
 import './App.scss';
 
+
 class App extends Component{
   constructor(props){
     super(props);
     this.state={
       response: true,
-      sesrchLink: '',
+      searchLink: '',
       media: [],
       pages: [],
       currentPage: null

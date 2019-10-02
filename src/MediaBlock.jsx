@@ -2,34 +2,40 @@ import React, {Component} from 'react';
 import './App.scss';
 
 class MediaBlock extends Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      Rated: '',
-      Runtime: '',
-      Genre: '',
-      Director: '',
-      Writer: '',
-      Actors: '',
-      Country: '',
-      Rating: '',
-      Released: '',
-      Production: '',
-      Website: '',
-      Awards: '',
-      Plot: ''
-    }
+  modalY(obj) {
+      let modalBack = document.createElement('div'),
+          modalWindowY = document.createElement('div'),
+          modalClose = document.createElement('a');
+
+      modalBack.className = 'modal-back';
+      modalClose.className = 'y-modal-close';
+      modalClose.innerHTML = '<i class="close-icon"></i>';
+      modalWindowY.className = 'y-modal-window';
+      modalWindowY.appendChild(obj);
+      modalWindowY.classList.add('show-modal');
+      modalWindowY.appendChild(modalClose);
+      modalBack.appendChild(modalWindowY);
+      document.body.appendChild(modalBack);
+
+      document.querySelector('.modal-back').addEventListener('click', function (e) {
+          if (e.target.classList.contains('modal-back')) {
+              document.body.removeChild(this);
+          }
+      });
+
+      document.querySelector('.y-modal-close').onclick = function () {
+          document.querySelector('.modal-back').remove(this);
+      };
   }
 
-  /*showDetails = event =>{
+  showDetails = event =>{
     event.preventDefault();
     const targetId = event.target.getAttribute('mid');
-    const detailsTarget = event.target.previousSibling.firstChild;
 
     fetch('http://www.omdbapi.com/?apikey=38697045&i=' + targetId + '&plot=full', {
       method: 'GET'
     }).then(response => response.json()).then(json => {
-      this.setState({
+      const detailObj = {
         Rated: json.Rated,
         Runtime: json.Runtime,
         Genre: json.Genre,
@@ -43,9 +49,22 @@ class MediaBlock extends Component{
         Website: json.Website,
         Awards: json.Awards,
         Plot: json.Plot
-      })
+      }
 
-      for(let key in this.state){
+      let modalContent = document.createElement('div');
+      let poster = document.createElement('img');
+      let table = document.createElement('table');
+
+      modalContent.className = 'Media-details'
+      poster.className = 'Modal-poster';
+
+      if(json.Poster !== 'N/A'){
+        poster.src = json.Poster;
+      } else{
+        poster.src = '/images/no-poster.jpg';
+      }
+
+      for(let key in detailObj){
         let tr = document.createElement('tr');
         let th = document.createElement('td');
         let td = document.createElement('td');
@@ -54,14 +73,19 @@ class MediaBlock extends Component{
         th.className = 'Media-block__info-col col-th';
         td.className = 'Media-block__info-col';
         th.innerHTML = key;
-        td.innerHTML = this.state[key];
+        td.innerHTML = detailObj[key];
 
         tr.appendChild(th);
         tr.appendChild(td);
-        detailsTarget.appendChild(tr);
+        table.appendChild(tr);
       }
+
+      modalContent.appendChild(poster);
+      modalContent.appendChild(table);
+
+      this.modalY(modalContent)
     })
-  }*/
+  }
 
   render(){
     return(
@@ -83,6 +107,7 @@ class MediaBlock extends Component{
                 </tr>
               </tbody>
             </table>
+            <div className="Media-block__details" mid={this.props.data.imdbID} onClick={(event)=>this.showDetails(event)}>Show details</div>
           </div>
         </div>
     )

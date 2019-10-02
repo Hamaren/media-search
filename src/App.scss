@@ -42,9 +42,45 @@ table {
 	border-spacing: 0;
 }
 
+@mixin nlgx {
+    @media all and (max-width: 1699px) {
+        @content;
+    }
+}
+@mixin nlg {
+    @media all and (max-width: 1240px) {
+        @content;
+    }
+}
+
+@mixin nmd {
+    @media all and (max-width: 1023px) {
+        @content;
+    }
+}
+
+@mixin nsm {
+    @media all and (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin nxs {
+    @media all and (max-width: 450px) {
+        @content;
+    }
+}
+
+@mixin nxxs {
+    @media all and (max-width: 350px) {
+        @content;
+    }
+}
+
 body{
   position: relative;
   color: #fff;
+	background: #333;
 }
 
 .Pagination{
@@ -91,7 +127,7 @@ body{
 
   &__poster{
     width: 300px;
-    //opacity: 0;
+    opacity: 0;
   }
 
   &__poster-img{
@@ -249,3 +285,105 @@ input:active, button:active textarea:active {outline:none;}
 textarea {resize:none;}
 textarea {resize:vertical;}
 textarea {resize:horizontal;}
+
+.Media-details{
+	display: flex;
+	align-items: flex-start;
+	color: #333;
+}
+
+.Modal-poster{
+	width: 200px;
+	margin-right: 20px;
+}
+
+.y-modal-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border-radius: 5px;
+  font-size: 0;
+  padding: 60px 30px 30px 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 900px;
+  filter: blur(14px);
+
+  @include nlg {
+    width: 80%;
+
+    @include nmd{
+      padding: 60px 20px 20px 20px;
+
+      @include nsm{
+        width: 94%;
+        padding: 40px 10px 10px 10px;
+      }
+    }
+  }
+}
+
+.y-modal-close{
+  cursor: pointer;
+  background: none;
+  position: absolute;
+  padding: 0;
+  right: 30px;
+  top: 20px;
+
+  @include nmd{
+    right: 20px;
+
+    @include nsm{
+      right: 10px;
+      top: 10px;
+    }
+  }
+}
+
+.close-icon {
+	display: block;
+	width: 22px;
+	height: 22px;
+	background: url('/images/icons/close-icon.svg') no-repeat;
+}
+
+.modal-loader{
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.show-modal{
+  animation: modal-anim 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes modal-anim {
+  from{
+    filter: blur(14px);
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  to{
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+}
+
+.modal-back {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 998;
+}
